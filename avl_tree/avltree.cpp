@@ -3,7 +3,6 @@
 #include "avltree.hpp"
 #include <algorithm>
 #include <concepts>
-#include <cstddef>
 #include <iostream>
 
 template <std::totally_ordered T> Node<T> *AVLTree<T>::insert(T value) {
@@ -136,6 +135,11 @@ template <std::totally_ordered T> AVLTree<T>::AVLTree() : _root(nullptr) {}
 template <std::totally_ordered T>
 AVLTree<T>::AVLTree(const AVLTree &other) : _root(_clone(other._root)) {}
 
+template <std::totally_ordered T>
+AVLTree<T>::AVLTree(AVLTree &&other) : _root(other._root) {
+  other._root = nullptr;
+}
+
 template <std::totally_ordered T> AVLTree<T>::~AVLTree() {
   _destroy(_root);
   _root = nullptr;
@@ -163,9 +167,17 @@ Node<T> *AVLTree<T>::_clone(const Node<T> *node) {
 }
 
 template <std::totally_ordered T>
-AVLTree<T> &AVLTree<T>::operator=(AVLTree other) {
+AVLTree<T> &AVLTree<T>::operator=(AVLTree &other) {
   std::swap(_root, other._root);
   return *this;
 }
 
+template <std::totally_ordered T>
+AVLTree<T> &AVLTree<T>::operator=(AVLTree &&other) {
+  if (this != &other) {
+    _root = other._root;
+    other._root = nullptr;
+  }
+  return *this;
+}
 #endif

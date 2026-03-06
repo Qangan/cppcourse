@@ -61,5 +61,35 @@ int main() {
   std::cout << "meanwhile: ";
   tree.print_values();
 
+  AVLTree<int> src;
+  src.insert(10);
+  src.insert(5);
+  src.insert(15);
+  std::cout << "move src: ";
+  src.print_values();
+  AVLTree<int> moveTree(std::move(src));
+  std::cout << "move dst: ";
+  moveTree.print_values();
+
+  src.insert(1);
+  std::cout << "src after move+insert: ";
+  src.print_values();
+  src.remove(1);
+  AVLTree<int> emptyMoved(std::move(src));
+  emptyMoved.insert(99);
+  std::cout << "moved from empty, inserted 99: ";
+  emptyMoved.print_values();
+
+  AVLTree<int> a;
+  a.insert(3);
+  a.insert(7);
+  AVLTree<int> b(std::move(a));
+  b.insert(1);
+  b.insert(9);
+  std::cout << "b after move+inserts: ";
+  b.print_values();
+  a.insert(100);
+  std::cout << "a after own insert: ";
+  a.print_values();
   return 0;
 }

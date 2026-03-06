@@ -9,7 +9,9 @@ public:
   AVLTree();
   ~AVLTree();
   AVLTree(const AVLTree &other);
-  AVLTree &operator=(AVLTree other);
+  AVLTree(AVLTree &&other);
+  AVLTree &operator=(AVLTree &other);
+  AVLTree &operator=(AVLTree &&other);
   Node<T> *insert(T val);
   Node<T> *remove(T val);
   void print_values();

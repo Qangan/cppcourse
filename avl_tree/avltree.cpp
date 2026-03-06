@@ -167,13 +167,16 @@ Node<T> *AVLTree<T>::_clone(const Node<T> *node) {
 }
 
 template <std::totally_ordered T>
-AVLTree<T> &AVLTree<T>::operator=(AVLTree &other) {
-  std::swap(_root, other._root);
+AVLTree<T> &AVLTree<T>::operator=(const AVLTree &other) {
+  if (this != &other) {
+    _destroy(_root);
+    _root = _clone(other._root);
+  }
   return *this;
 }
 
 template <std::totally_ordered T>
-AVLTree<T> &AVLTree<T>::operator=(AVLTree &&other) {
+AVLTree<T> &AVLTree<T>::operator=(const AVLTree &&other) {
   if (this != &other) {
     _root = other._root;
     other._root = nullptr;

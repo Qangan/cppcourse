@@ -1,3 +1,6 @@
 [submodule "VeryReducedInstructionSetComputer"]
 	path = VeryReducedInstructionSetComputer
 	url = https://github.com/nsu-syspro/VeryReducedInstructionSetComputer
+[submodule "iforgottoforkmyrepoandregretaboutitnow"]
+	path = iforgottoforkmyrepoandregretaboutitnow
+	url = https://github.com/Qangan/VeryReducedInstructionSetComputer
